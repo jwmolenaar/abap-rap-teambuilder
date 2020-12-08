@@ -1,0 +1,34 @@
+managed; // implementation in class zbp_i_zzhp_muppet unique;
+
+define behavior for ZI_ZZHP_MUPPET //alias <alias_name>
+persistent table ZZHP_MUPPETS
+lock master
+// authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) MuppetUuid;
+  field ( readonly : update ) CreatedBy;
+  field ( readonly : update ) CreatedAt;
+  field ( readonly : update ) LastChangedBy;
+  field ( readonly : update ) LastChangedAt;
+  field ( mandatory ) MuppetName;
+
+  mapping for ZZHP_MUPPETS
+  {
+    MuppetUuid         = muppet_uuid;
+    MuppetName         = muppet_name;
+    HomePage           = home_page;
+    ImageLink          = image_url;
+    hourlyFee          = hourly_fee;
+    CurrencyCode       = currency_code;
+    CreatedAt          = created_at;
+    CreatedBy          = created_by;
+    LastChangedAt      = last_changed_at;
+    LastChangedBy      = last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

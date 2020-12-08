@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service muppets'
+define service ZUI_ZZHP_MUPPET {
+  expose ZC_ZZHP_MUPPET as Muppet;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Teams'
+define service ZUI_ZZHP_TEAMS {
+  expose ZC_ZZHP_TEAM;
+  expose ZC_ZZHP_TEAMMEMBER;
+}

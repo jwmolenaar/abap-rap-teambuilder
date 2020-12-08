@@ -1,0 +1,66 @@
+managed; // implementation in class zbp_i_zzhp_team unique;
+
+define behavior for ZI_ZZHP_TEAM alias Team
+persistent table ZZHP_TEAMS
+lock master
+//authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Member { create; }
+
+  field ( numbering : managed, readonly ) TeamUuid;
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy, LocalLastChangedAt;
+//  field ( readonly : update ) CreatedBy;
+//  field ( readonly : update ) CreatedAt;
+//  field ( readonly : update ) LastChangedBy;
+//  field ( readonly : update ) LastChangedAt;
+
+  mapping for ZZHP_TEAMS
+  {
+    TeamUuid           = team_uuid;
+    TeamName           = team_name;
+    TeamNickName       = team_nickname;
+
+    CreatedAt          = created_at;
+    CreatedBy          = created_by;
+    LastChangedAt      = last_changed_at;
+    LastChangedBy      = last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for zi_zzhp_teammember alias Teammember
+persistent table ZZHP_TEAMMEMBERS
+lock dependent by _Team
+//authorization dependent by <association>
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  association _Team;
+
+  field ( numbering : managed, readonly ) MemberUuid;
+  field ( readonly ) TeamId;
+  field ( readonly ) CreatedBy, LastChangedBy, LocalLastChangedAt;
+//  field ( readonly : update ) CreatedBy;
+//  field ( readonly : update ) CreatedAt;
+//  field ( readonly : update ) LastChangedBy;
+//  field ( readonly : update ) LastChangedAt;
+
+  mapping for ZZHP_TEAMMEMBERS
+  {
+    MemberUuid         = member_uuid;
+    MuppetId           = muppet_id;
+    TeamId             = team_id;
+    TeamRole           = team_role;
+    CreatedAt          = created_at;
+    CreatedBy          = created_by;
+    LastChangedAt      = last_changed_at;
+    LastChangedBy      = last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+
+}
